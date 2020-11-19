@@ -1,0 +1,1 @@
+../node_modules/loam/lib/loam-worker.min.js
