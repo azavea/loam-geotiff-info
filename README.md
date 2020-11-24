@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+## Initial configuration
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Make a copy of `.env.example` as `.env` and fill out the `REACT_APP_MAPBOX_TOKEN` setting.
 
 ## Available Scripts
 
