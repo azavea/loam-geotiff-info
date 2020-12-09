@@ -1,10 +1,7 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,19 +10,63 @@
   }
 }
 
-.App-header {
+.header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  align-items: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.content {
+  max-width: 75%;
+}
+
+.code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-pane {
+  display: inherit;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pane-left {
+  max-width: 50%;
+  align-self: flex-start;
+}
+
+.pane-right {
+  max-width: 50%;
+  align-self: flex-end;
+}
+
+.info-metadata {
+  display: inherit;
+  flex-direction: column;
+}
+
+.metadata-row {
+  display: inherit;
+  justify-content: space-between;
+}
+
+.wkt {
+  overflow-wrap: break-word;
+}
+
+.map {
+  width: 300px;
+  height: 300px;
 }
 
 @keyframes App-logo-spin {
