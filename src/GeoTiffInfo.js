@@ -71,12 +71,11 @@ function GeoTiffInfo({
       boundsGeoJson &&
         map.addLayer({
           id: MAPBOX_BOUNDS_ID,
-          type: "fill",
+          type: "line",
           source: "image-bounds",
           layout: {},
           paint: {
-            "fill-color": "#808",
-            "fill-opacity": 0.8,
+            "line-color": "#f1b310",
           },
         });
       cornersLngLat &&
@@ -95,8 +94,8 @@ function GeoTiffInfo({
     <>
       <Link to="/">← Try another file</Link>
       <div className="info-content">
-        <div>
-          <Link to="/">✖️</Link>
+        <div className="info-header">
+          <Link to="/">✖</Link>
         </div>
         <div className="info-pane">
           <div
@@ -105,20 +104,30 @@ function GeoTiffInfo({
             ref={mapContainer}
           ></div>
           <div className="info-metadata pane-right">
-            {name && <p>File name: {name}</p>}
-            {width && height && (
+            {name && (
               <p>
-                Size: {width}, {height}
+                <span className="highlight">File name:</span> {name}
               </p>
             )}
-            {bandCount && <p>Band count: {bandCount}</p>}
+            {width && height && (
+              <p>
+                <span className="highlight">Size:</span> {width}, {height}
+              </p>
+            )}
+            {bandCount && (
+              <p>
+                <span className="highlight">Band count:</span> {bandCount}
+              </p>
+            )}
             {wkt && (
               <>
                 <div className="metadata-row">
-                  <div>Coordinate system:</div>
+                  <div>
+                    <span className="highlight">Coordinate system:</span>
+                  </div>
                   <div>
                     {copiedWkt ? (
-                      <span>✅</span>
+                      <span>✔︎</span>
                     ) : (
                       <button
                         onClick={() =>
@@ -139,20 +148,24 @@ function GeoTiffInfo({
         </div>
         <div className="info-pane">
           {cornersGeo && cornersLngLat && (
-            <div>
-              <p>Corner coordinates</p>
-              <BoundsExport
-                cornersGeo={cornersGeo}
-                cornersLngLat={cornersLngLat}
-              />
-              <table>
+            <div className="corner-coordinates">
+              <div className="coordinates-header">
+                <p>
+                  <span className="highlight">Corner coordinates</span>
+                </p>
+                <BoundsExport
+                  cornersGeo={cornersGeo}
+                  cornersLngLat={cornersLngLat}
+                />
+              </div>
+              <table className="coordinates-table">
                 <thead>
                   <tr>
-                    <th>Corner</th>
-                    <th scope="col" colSpan="2">
+                    <th className="highlight">Corner</th>
+                    <th className="highlight" scope="col" colSpan="2">
                       Raster CRS (X / Y)
                     </th>
-                    <th scope="col" colSpan="2">
+                    <th className="highlight" scope="col" colSpan="2">
                       Longitude / Latitude
                     </th>
                   </tr>

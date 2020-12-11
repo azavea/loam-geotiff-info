@@ -1,8 +1,9 @@
-import logo from "./logo.svg";
+import GitHubLogo from "./GitHub-Mark-Light-120px-plus.png";
 import "./App.css";
 import loam from "loam";
 import FilePicker from "./FilePicker";
 import GeoTiffInfo from "./GeoTiffInfo";
+import About from "./About";
 import {
   BrowserRouter as Router,
   Switch,
@@ -77,57 +78,60 @@ function App() {
   }, [selectedFile]);
 
   return (
-      <>
-    <Modal
-      isOpen={isModalOpen}
-      onRequestClose={() => setIsModalOpen(false)}
-    >
-      <div className="modal-header">
-      <h2>About</h2>
-      <button onClick={() => setIsModalOpen(false)}>✖️</button>
-      </div>
-      <div className="modal-body">
-        <p>TODO</p>
-      </div>
-    </Modal>
-    <Router>
+    <>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        style={{ content: { "background-color": "#27323d", color: "#fefefe" } }}
+      >
+        <div className="modal-header">
+          <h2>About</h2>
+          <button onClick={() => setIsModalOpen(false)}>✖️</button>
+        </div>
+        <div className="modal-body">
+          <About />
+        </div>
+      </Modal>
+      <Router>
         <header className="header">
           <div>Azavea logo | Loam: Run GDAL in the browser</div>
           <div>
             <button onClick={() => setIsModalOpen(true)}>About</button>
-            <a href="https://github.com/azavea/loam">GitHub Logo</a>
+            <a href="https://github.com/azavea/loam">
+              <img src={GitHubLogo} width="32px" alt="GitHub logo" />
+            </a>
           </div>
         </header>
         <main className="code">
-        <div className="content">
-          <Switch>
-            <Route exact path="/">
-              {!loamLoaded && (
-                <img src={logo} className="spinner" alt="loading-spinner" />
-              )}
-              {loamLoaded && (
-                <FilePicker onFileSelect={(file) => setSelectedFile(file)} />
-              )}
-            </Route>
-            <Route path="/geotiff">
-              {selectedFile && (
-                <GeoTiffInfo
-                  name={selectedFile.name}
-                  width={gtifWidth}
-                  height={gtifHeight}
-                  bandCount={gtifBands}
-                  wkt={gtifWkt}
-                  cornersGeo={cornersGeo}
-                  cornersLngLat={cornersLngLat}
-                />
-              )}
-              {!selectedFile && <Redirect to="/" />}
-            </Route>
-          </Switch>
-            </div>
+          <div className="content">
+            <Switch>
+              <Route exact path="/">
+                {!loamLoaded && (
+                  <img src="" className="spinner" alt="loading-spinner" />
+                )}
+                {loamLoaded && (
+                  <FilePicker onFileSelect={(file) => setSelectedFile(file)} />
+                )}
+              </Route>
+              <Route path="/geotiff">
+                {selectedFile && (
+                  <GeoTiffInfo
+                    name={selectedFile.name}
+                    width={gtifWidth}
+                    height={gtifHeight}
+                    bandCount={gtifBands}
+                    wkt={gtifWkt}
+                    cornersGeo={cornersGeo}
+                    cornersLngLat={cornersLngLat}
+                  />
+                )}
+                {!selectedFile && <Redirect to="/" />}
+              </Route>
+            </Switch>
+          </div>
         </main>
-    </Router>
-      </>
+      </Router>
+    </>
   );
 }
 

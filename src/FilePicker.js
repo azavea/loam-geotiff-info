@@ -21,13 +21,13 @@ function FilePicker({ onFileSelect }) {
     >
       {({ getRootProps, getInputProps }) => (
         <div {...getRootProps()}>
-          <div style={{ background: isDragging ? "#f5f5f5" : "#ffffff" }}>
+          <div style={{ border: isDragging ? "2px #f1b310 solid" : "none" }}>
             {!isDragging ? (
               <>
                 <p>
                   Drag & drop or select a GeoTIFF from your file system.
                   <br />
-                  Informationabout the file will be displayed.
+                  Information about the file will be displayed.
                 </p>
               </>
             ) : (

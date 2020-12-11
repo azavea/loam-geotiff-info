@@ -1,7 +1,26 @@
+:root {
+  --bg-color-light: #27323d;
+  --bg-color-dark: #010101;
+  --text-color: #fefefe;
+  --highlight-color: #f1b310;
+}
+
+.highlight {
+  color: var(--highlight-color);
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
 main {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: var(--bg-color-light);
+  color: var(--text-color);
+  height: 90vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -11,17 +30,29 @@ main {
 }
 
 .header {
-  background-color: #282c34;
-  min-height: 10vh;
+  color: var(--text-color);
+  background-color: var(--bg-color-light);
+  height: 10vh;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .content {
   max-width: 75%;
+}
+
+.modal-body, .modal-header {
+  color: var(--text-color);
+  background-color: var(--bg-color-light);
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .code {
@@ -32,6 +63,13 @@ main {
 .info-content {
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-color-dark);
+}
+
+.info-header {
+  display: inherit;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .info-pane {
@@ -62,11 +100,29 @@ main {
 
 .wkt {
   overflow-wrap: break-word;
+  background-color: var(--bg-color-light);
 }
 
 .map {
   width: 300px;
   height: 300px;
+}
+
+.corner-coordinates {
+  display: inherit;
+  flex-direction: column;
+  background-color: var(--bg-color-light);
+}
+
+.coordinates-header {
+  display: inherit;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.export-buttons {
+  display: inherit;
+  flex-direction:row;
 }
 
 @keyframes App-logo-spin {
