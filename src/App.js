@@ -1,4 +1,5 @@
 import GitHubLogo from "./GitHub-Mark-Light-120px-plus.png";
+import AzaveaLogo from "./azavea_white_solo.svg";
 import "./App.css";
 import loam from "loam";
 import FilePicker from "./FilePicker";
@@ -94,7 +95,7 @@ function App() {
       </Modal>
       <Router>
         <header className="header">
-          <div>Azavea logo | Loam: Run GDAL in the browser</div>
+          <div><img src={AzaveaLogo} alt="Azavea logo" height="32px" /> | Loam: Run GDAL in the browser</div>
           <div>
             <button onClick={() => setIsModalOpen(true)}>About</button>
             <a href="https://github.com/azavea/loam">
