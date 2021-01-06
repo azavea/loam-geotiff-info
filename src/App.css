@@ -20,7 +20,7 @@ main {
   justify-content: center;
   background-color: var(--bg-color-light);
   color: var(--text-color);
-  height: 90vh;
+  min-height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -38,10 +38,11 @@ main {
   justify-content: space-between;
   align-items: center;
   font-size: calc(10px + 2vmin);
+  padding: 0rem 1rem 0rem 1rem;
 }
 
 .content {
-  max-width: 75%;
+  max-width: 60%;
 }
 
 .modal-body, .modal-header {
@@ -64,6 +65,8 @@ main {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-color-dark);
+  padding: 1rem;
+  margin-top: 0.5rem;
 }
 
 .info-header {
@@ -76,16 +79,21 @@ main {
   display: inherit;
   flex-direction: row;
   justify-content: center;
+  max-height: 60vh;
 }
 
 .pane-left {
+  width: 50%;
   max-width: 50%;
   align-self: flex-start;
+  margin: 1.5rem;
 }
 
 .pane-right {
+  width: 50%;
   max-width: 50%;
   align-self: flex-end;
+  margin: 1.5rem;
 }
 
 .info-metadata {
@@ -100,12 +108,16 @@ main {
 
 .wkt {
   overflow-wrap: break-word;
+  overflow-y: scroll;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  height: 10rem;
   background-color: var(--bg-color-light);
 }
 
 .map {
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 35vh;
 }
 
 .corner-coordinates {
@@ -118,6 +130,18 @@ main {
   display: inherit;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.coordinates-table {
+  border-top: 1px var(--bg-color-dark) solid;
+  border-collapse: collapse;
+}
+
+.coordinates-table td, .coordinates-table th {
+  padding: 0.5rem;
+  border: 1px var(--bg-color-dark) solid;
 }
 
 .export-buttons {
