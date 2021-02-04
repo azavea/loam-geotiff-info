@@ -28,6 +28,7 @@ function App() {
   const [gtifTransform, setGtifTransform] = useState(null);
   const [cornersGeo, setCornersGeo] = useState(null);
   const [cornersLngLat, setCornersLngLat] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     loam.initialize("/").then(setLoamLoaded(true));
@@ -69,13 +70,16 @@ function App() {
 
   useEffect(() => {
     selectedFile &&
-      loam.open(selectedFile).then((ds) => {
-        ds.width().then((width) => setGtifWidth(width));
-        ds.height().then((height) => setGtifHeight(height));
-        ds.count().then((count) => setGtifBands(count));
-        ds.wkt().then((wkt) => setGtifWkt(wkt));
-        ds.transform().then((geoTransform) => setGtifTransform(geoTransform));
-      });
+      loam
+        .open(selectedFile)
+        .then((ds) => {
+          ds.width().then((width) => setGtifWidth(width));
+          ds.height().then((height) => setGtifHeight(height));
+          ds.count().then((count) => setGtifBands(count));
+          ds.wkt().then((wkt) => setGtifWkt(wkt));
+          ds.transform().then((geoTransform) => setGtifTransform(geoTransform));
+        })
+        .catch((err) => setErrorMessage(err.message));
   }, [selectedFile]);
 
   return (
@@ -83,11 +87,23 @@ function App() {
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        style={{ content: { "background-color": "#27323d", color: "#fefefe" } }}
+        className="modal"
+        style={{
+          content: {
+            backgroundColor: "#27323d",
+            color: "#fefefe",
+            maxWidth: "50%",
+          },
+        }}
       >
         <div className="modal-header">
           <h2>About</h2>
-          <button onClick={() => setIsModalOpen(false)}>✖️</button>
+          <button
+            className="modal-close-button"
+            onClick={() => setIsModalOpen(false)}
+          >
+            ✖
+          </button>
         </div>
         <div className="modal-body">
           <About />
@@ -95,9 +111,17 @@ function App() {
       </Modal>
       <Router>
         <header className="header">
-          <div><img src={AzaveaLogo} alt="Azavea logo" height="32px" /> | Loam: Run GDAL in the browser</div>
           <div>
-            <button onClick={() => setIsModalOpen(true)}>About</button>
+            <img src={AzaveaLogo} alt="Azavea logo" height="32px" /> | Loam: Run
+            GDAL in the browser
+          </div>
+          <div>
+            <button
+              className="about-button"
+              onClick={() => setIsModalOpen(true)}
+            >
+              About
+            </button>
             <a href="https://github.com/azavea/loam">
               <img src={GitHubLogo} width="32px" alt="GitHub logo" />
             </a>
@@ -111,7 +135,19 @@ function App() {
                   <img src="" className="spinner" alt="loading-spinner" />
                 )}
                 {loamLoaded && (
-                  <FilePicker onFileSelect={(file) => setSelectedFile(file)} />
+                  <FilePicker
+                    onFileSelect={(file) => {
+                      setGtifWidth(null);
+                      setGtifHeight(null);
+                      setGtifBands(null);
+                      setGtifWkt("");
+                      setGtifTransform(null);
+                      setCornersGeo(null);
+                      setCornersLngLat(null);
+                      setErrorMessage(null);
+                      setSelectedFile(file);
+                    }}
+                  />
                 )}
               </Route>
               <Route path="/geotiff">
@@ -124,6 +160,7 @@ function App() {
                     wkt={gtifWkt}
                     cornersGeo={cornersGeo}
                     cornersLngLat={cornersLngLat}
+                    errorMessage={errorMessage}
                   />
                 )}
                 {!selectedFile && <Redirect to="/" />}

@@ -14,6 +14,7 @@ function GeoTiffInfo({
   wkt,
   cornersGeo,
   cornersLngLat,
+  errorMessage,
 }) {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN || "";
 
@@ -47,6 +48,10 @@ function GeoTiffInfo({
         style: "mapbox://styles/mapbox/streets-v11",
       });
       setMap(newMap);
+      // Currently, the map isn't filling the full width of its container on initial render. It'd be
+      // nice not to have to do this, but I haven't found an immediately obvious fix and don't want
+      // to dedicate too much time to fiddling with this.
+      newMap.once("load", () => newMap.resize());
     },
     [],
     () => {
@@ -95,14 +100,17 @@ function GeoTiffInfo({
       <Link to="/">← Try another file</Link>
       <div className="info-content">
         <div className="info-header">
-          <Link to="/">✖</Link>
+          <Link className="info-close" to="/">
+            ✖
+          </Link>
         </div>
+        {errorMessage && (
+          <div className="error info-header">{errorMessage}</div>
+        )}
         <div className="info-pane">
-          <div
-            id="map-container"
-            className="pane-left map"
-            ref={mapContainer}
-          ></div>
+          <div className="pane-left">
+            <div id="map-container" className="map" ref={mapContainer}></div>
+          </div>
           <div className="info-metadata pane-right">
             {name && (
               <p>
@@ -127,14 +135,19 @@ function GeoTiffInfo({
                   </div>
                   <div>
                     {copiedWkt ? (
-                      <span>✔︎</span>
+                      <div className="export-button">
+                        <span>✔︎</span>
+                      </div>
                     ) : (
                       <button
-                        onClick={() =>
+                        className="export-button"
+                        onClick={() => {
                           navigator.clipboard
                             .writeText(wkt)
-                            .then(() => setCopiedWkt(true))
-                        }
+                            .then(() => setCopiedWkt(true));
+                          // Turn the button back on after 5 seconds so they can reuse it
+                          setTimeout(() => setCopiedWkt(false), 5000);
+                        }}
                       >
                         Copy
                       </button>
@@ -172,32 +185,40 @@ function GeoTiffInfo({
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>{cornersGeo.ll[0]}</td>
-                    <td>{cornersGeo.ll[1]}</td>
-                    <td>{cornersLngLat.ll[0]}</td>
-                    <td>{cornersLngLat.ll[1]}</td>
+                    <th className="corner" scope="row">
+                      1
+                    </th>
+                    <td className="coord">{cornersGeo.ll[0]}</td>
+                    <td className="coord">{cornersGeo.ll[1]}</td>
+                    <td className="coord">{cornersLngLat.ll[0]}</td>
+                    <td className="coord">{cornersLngLat.ll[1]}</td>
                   </tr>
                   <tr>
-                    <th scope="row">2</th>
-                    <td>{cornersGeo.lr[0]}</td>
-                    <td>{cornersGeo.lr[1]}</td>
-                    <td>{cornersLngLat.lr[0]}</td>
-                    <td>{cornersLngLat.lr[1]}</td>
+                    <th className="corner" scope="row">
+                      2
+                    </th>
+                    <td className="coord">{cornersGeo.lr[0]}</td>
+                    <td className="coord">{cornersGeo.lr[1]}</td>
+                    <td className="coord">{cornersLngLat.lr[0]}</td>
+                    <td className="coord">{cornersLngLat.lr[1]}</td>
                   </tr>
                   <tr>
-                    <th scope="row">3</th>
-                    <td>{cornersGeo.ur[0]}</td>
-                    <td>{cornersGeo.ur[1]}</td>
-                    <td>{cornersLngLat.ur[0]}</td>
-                    <td>{cornersLngLat.ur[1]}</td>
+                    <th className="corner" scope="row">
+                      3
+                    </th>
+                    <td className="coord">{cornersGeo.ur[0]}</td>
+                    <td className="coord">{cornersGeo.ur[1]}</td>
+                    <td className="coord">{cornersLngLat.ur[0]}</td>
+                    <td className="coord">{cornersLngLat.ur[1]}</td>
                   </tr>
                   <tr>
-                    <th scope="row">4</th>
-                    <td>{cornersGeo.ul[0]}</td>
-                    <td>{cornersGeo.ul[1]}</td>
-                    <td>{cornersLngLat.ul[0]}</td>
-                    <td>{cornersLngLat.ul[1]}</td>
+                    <th className="corner" scope="row">
+                      4
+                    </th>
+                    <td className="coord">{cornersGeo.ul[0]}</td>
+                    <td className="coord">{cornersGeo.ul[1]}</td>
+                    <td className="coord">{cornersLngLat.ul[0]}</td>
+                    <td className="coord">{cornersLngLat.ul[1]}</td>
                   </tr>
                 </tbody>
               </table>
