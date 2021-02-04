@@ -51,39 +51,67 @@ export default function BoundsExport({ cornersGeo, cornersLngLat }) {
   return (
     <div className="export-buttons">
       <Wrapper onSelection={handleSelection}>
-        <Button>Download</Button>
-        <Menu>
-          <p>GeoJSON</p>
-          <MenuItem value={["download", "geojson", geoJsonStr(cornersLngLat)]}>
+        <Button className="export-button">
+          <span className="underline">Download</span>⌄
+        </Button>
+        <Menu className="export-menu">
+          <p className="export-menu-section">GeoJSON</p>
+          <MenuItem
+            className="export-menu-item"
+            value={["download", "geojson", geoJsonStr(cornersLngLat)]}
+          >
             Longitude / Latitude
           </MenuItem>
-          <MenuItem value={["download", "geojson", geoJsonStr(cornersGeo)]}>
+          <MenuItem
+            className="export-menu-item"
+            value={["download", "geojson", geoJsonStr(cornersGeo)]}
+          >
             Raster CRS
           </MenuItem>
-          <p>WKT</p>
-          <MenuItem value={["download", "wkt", wktStr(cornersLngLat)]}>
+          <p className="export-menu-section">WKT</p>
+          <MenuItem
+            className="export-menu-item"
+            value={["download", "wkt", wktStr(cornersLngLat)]}
+          >
             Longitude / Latitude
           </MenuItem>
-          <MenuItem value={["download", "wkt", wktStr(cornersGeo)]}>
+          <MenuItem
+            className="export-menu-item"
+            value={["download", "wkt", wktStr(cornersGeo)]}
+          >
             Raster CRS
           </MenuItem>
         </Menu>
       </Wrapper>
       <Wrapper onSelection={handleSelection}>
-        <Button>Copy</Button>
-        <Menu>
-          <p>GeoJSON</p>
-          <MenuItem value={["copy", "geojson", geoJsonStr(cornersLngLat)]}>
+        <Button className="export-button">
+          <span className="underline">Copy</span>⌄
+        </Button>
+        <Menu className="export-menu">
+          <p className="export-menu-section">GeoJSON</p>
+          <MenuItem
+            className="export-menu-item"
+            value={["copy", "geojson", geoJsonStr(cornersLngLat)]}
+          >
             Longitude / Latitude
           </MenuItem>
-          <MenuItem value={["copy", "geojson", geoJsonStr(cornersGeo)]}>
+          <MenuItem
+            className="export-menu-item"
+            value={["copy", "geojson", geoJsonStr(cornersGeo)]}
+          >
             Raster CRS
           </MenuItem>
-          <p>WKT</p>
-          <MenuItem value={["copy", "wkt", wktStr(cornersLngLat)]}>
+          <p className="export-menu-section">WKT</p>
+          <MenuItem
+            className="export-menu-item"
+            value={["copy", "wkt", wktStr(cornersLngLat)]}
+          >
             Longitude / Latitude
           </MenuItem>
-          <MenuItem value={["copy", "wkt", wktStr(cornersGeo)]}>
+          <MenuItem
+            className="export-menu-item"
+            value={["copy", "wkt", wktStr(cornersGeo)]}
+          >
             Raster CRS
           </MenuItem>
         </Menu>

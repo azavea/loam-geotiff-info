@@ -1,17 +1,30 @@
 :root {
   --bg-color-light: #27323d;
+  --button-hover-color: #171e24;
   --bg-color-dark: #010101;
   --text-color: #fefefe;
   --highlight-color: #f1b310;
+  --border-radius: 0.25rem;
 }
 
 .highlight {
   color: var(--highlight-color);
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 a {
   color: var(--text-color);
-  text-decoration: none;
+}
+
+button {
+  all: unset;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 main {
@@ -41,11 +54,39 @@ main {
   padding: 0rem 1rem 0rem 1rem;
 }
 
-.content {
-  max-width: 60%;
+.error {
+  color: #e04040;
 }
 
-.modal-body, .modal-header {
+.about-button {
+  margin-right: 1rem;
+}
+
+.about-button:hover {
+  text-decoration: underline;
+}
+
+.modal {
+  margin: 1rem auto 1rem auto;
+  background-color: var(--bg-color-light);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.modal-close-button {
+  height: 2rem;
+  width: 2rem;
+  text-align: center;
+  border-radius: 1rem;
+  color: var(--text-color);
+}
+
+.modal-close-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.modal-body,
+.modal-header {
   color: var(--text-color);
   background-color: var(--bg-color-light);
 }
@@ -56,49 +97,59 @@ main {
   justify-content: space-between;
 }
 
+.content {
+  max-width: 60%;
+}
+
 .code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.info-close {
+  text-decoration: none;
 }
 
 .info-content {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-color-dark);
-  padding: 1rem;
   margin-top: 0.5rem;
+  border-radius: var(--border-radius);
 }
 
 .info-header {
   display: inherit;
   flex-direction: row;
   justify-content: flex-end;
+  margin: 1rem 1rem 0rem 0rem;
 }
 
 .info-pane {
   display: inherit;
   flex-direction: row;
   justify-content: center;
-  max-height: 60vh;
+  margin: 0rem 2rem 2rem 2rem;
 }
 
 .pane-left {
   width: 50%;
   max-width: 50%;
   align-self: flex-start;
-  margin: 1.5rem;
+  margin: 0rem 0.75rem 0rem 0rem;
 }
 
 .pane-right {
   width: 50%;
   max-width: 50%;
   align-self: flex-end;
-  margin: 1.5rem;
+  margin: 0rem 0rem 0rem 0.75rem;
 }
 
 .info-metadata {
   display: inherit;
   flex-direction: column;
+  overflow-wrap: break-word;
 }
 
 .metadata-row {
@@ -111,19 +162,23 @@ main {
   overflow-y: scroll;
   padding: 0.5rem;
   margin-top: 0.5rem;
-  height: 10rem;
+  height: 15rem;
   background-color: var(--bg-color-light);
+  border-radius: var(--border-radius);
 }
 
 .map {
-  width: 100%;
-  height: 35vh;
+  width: auto;
+  height: 30rem;
+  border-radius: var(--border-radius);
 }
 
 .corner-coordinates {
   display: inherit;
   flex-direction: column;
   background-color: var(--bg-color-light);
+  width: 100%;
+  border-radius: var(--border-radius);
 }
 
 .coordinates-header {
@@ -137,16 +192,66 @@ main {
 .coordinates-table {
   border-top: 1px var(--bg-color-dark) solid;
   border-collapse: collapse;
+  width: 100%;
 }
 
-.coordinates-table td, .coordinates-table th {
+.coordinates-table td,
+.coordinates-table th {
   padding: 0.5rem;
   border: 1px var(--bg-color-dark) solid;
 }
 
+.coordinates-table .corner {
+  max-width: 8%;
+  width: 8%;
+}
+
+.coordinates-table .coord {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 23%;
+  white-space: nowrap;
+  max-width: 0;
+}
+
 .export-buttons {
   display: inherit;
-  flex-direction:row;
+  flex-direction: row;
+}
+
+.export-button {
+  all: unset;
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin-right: 1rem;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.export-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.export-menu {
+  position: absolute;
+  background-color: white;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.export-menu-section {
+  color: #7a7a7b;
+}
+
+.export-menu-item {
+  color: #000000;
+  margin-left: 1rem;
+}
+
+.export-menu-item:hover {
+  color: #7a7a7b;
+  cursor: pointer;
 }
 
 @keyframes App-logo-spin {
