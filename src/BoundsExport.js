@@ -24,9 +24,9 @@ export default function BoundsExport({ cornersGeo, cornersLngLat }) {
   // c is for corners
   const wktStr = (c) => {
     const spPts = (x, y) => `${x} ${y}`;
-    return `POLYGON((${spPts(...c.ll)},${spPts(...c.lr)},${spPts(
-      ...c.ur
-    )},${spPts(...c.ul)},${spPts(...c.ll)}))`;
+    return `POLYGON((${spPts(...c.ll)},${spPts(...c.lr)},${spPts(...c.ur)},${spPts(
+      ...c.ul
+    )},${spPts(...c.ll)}))`;
   };
 
   const handleSelection = ([delivery, format, string]) => {
@@ -69,16 +69,10 @@ export default function BoundsExport({ cornersGeo, cornersLngLat }) {
             Raster CRS
           </MenuItem>
           <p className="export-menu-section">WKT</p>
-          <MenuItem
-            className="export-menu-item"
-            value={["download", "wkt", wktStr(cornersLngLat)]}
-          >
+          <MenuItem className="export-menu-item" value={["download", "wkt", wktStr(cornersLngLat)]}>
             Longitude / Latitude
           </MenuItem>
-          <MenuItem
-            className="export-menu-item"
-            value={["download", "wkt", wktStr(cornersGeo)]}
-          >
+          <MenuItem className="export-menu-item" value={["download", "wkt", wktStr(cornersGeo)]}>
             Raster CRS
           </MenuItem>
         </Menu>
@@ -102,16 +96,10 @@ export default function BoundsExport({ cornersGeo, cornersLngLat }) {
             Raster CRS
           </MenuItem>
           <p className="export-menu-section">WKT</p>
-          <MenuItem
-            className="export-menu-item"
-            value={["copy", "wkt", wktStr(cornersLngLat)]}
-          >
+          <MenuItem className="export-menu-item" value={["copy", "wkt", wktStr(cornersLngLat)]}>
             Longitude / Latitude
           </MenuItem>
-          <MenuItem
-            className="export-menu-item"
-            value={["copy", "wkt", wktStr(cornersGeo)]}
-          >
+          <MenuItem className="export-menu-item" value={["copy", "wkt", wktStr(cornersGeo)]}>
             Raster CRS
           </MenuItem>
         </Menu>

@@ -5,12 +5,7 @@ import loam from "loam";
 import FilePicker from "./FilePicker";
 import GeoTiffInfo from "./GeoTiffInfo";
 import About from "./About";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 
@@ -92,17 +87,18 @@ function App() {
           content: {
             backgroundColor: "#27323d",
             color: "#fefefe",
-            maxWidth: "50%",
+            width: "90%",
+            maxWidth: "500px",
           },
         }}
       >
         <div className="modal-header">
-          <h2>About</h2>
-          <button
-            className="modal-close-button"
-            onClick={() => setIsModalOpen(false)}
-          >
-            ✖
+          <h1 className="modal-title">About</h1>
+          <button className="modal-close-button" onClick={() => setIsModalOpen(false)}>
+            <i
+              className="info-content__close-button-icon fal fa-times-circle fa-lg"
+              alt="Close"
+            ></i>
           </button>
         </div>
         <div className="modal-body">
@@ -111,29 +107,38 @@ function App() {
       </Modal>
       <Router>
         <header className="header">
-          <div>
-            <img src={AzaveaLogo} alt="Azavea logo" height="32px" /> | Loam: Run
-            GDAL in the browser
-          </div>
-          <div>
-            <button
-              className="about-button"
-              onClick={() => setIsModalOpen(true)}
-            >
+          <h1 className="header__title-container">
+            <img src={AzaveaLogo} alt="Azavea" height="73" width="300" className="header__logo" />
+            <span className="header__divider" aria-hidden="true">
+              |
+            </span>
+            <span className="header__title">Loam: Run GDAL in the browser</span>
+          </h1>
+          <div className="header__menu">
+            <button className="header__about-button" onClick={() => setIsModalOpen(true)}>
               About
             </button>
-            <a href="https://github.com/azavea/loam">
-              <img src={GitHubLogo} width="32px" alt="GitHub logo" />
+            <a
+              href="https://github.com/azavea/loam"
+              className="header__github-link"
+              title="Go to project’s GitHub"
+            >
+              <img
+                src={GitHubLogo}
+                className="header__github-icon"
+                width="120"
+                height="120"
+                alt="GitHub"
+                aria-hidden="true"
+              />
             </a>
           </div>
         </header>
-        <main className="code">
+        <main className="main">
           <div className="content">
             <Switch>
               <Route exact path="/">
-                {!loamLoaded && (
-                  <img src="" className="spinner" alt="loading-spinner" />
-                )}
+                {!loamLoaded && <img src="" className="spinner" alt="loading-spinner" />}
                 {loamLoaded && (
                   <FilePicker
                     onFileSelect={(file) => {

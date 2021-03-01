@@ -2,6 +2,10 @@
 
 Make a copy of `.env.example` as `.env` and fill out the `REACT_APP_MAPBOX_TOKEN` setting.
 
+Then running `yarn install` should be all that you need to do.
+
+You can run `yarn format` to auto-format code.
+
 ## Available Scripts
 
 In the project directory, you can run:

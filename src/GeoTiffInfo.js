@@ -45,7 +45,9 @@ function GeoTiffInfo({
     () => {
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v11",
+        style: "mapbox://styles/azavea/cklaf2vjy03tw17n3isbaehys",
+        center: [0, 0],
+        zoom: 2,
       });
       setMap(newMap);
       // Currently, the map isn't filling the full width of its container on initial render. It'd be
@@ -96,62 +98,70 @@ function GeoTiffInfo({
   }, [boundsGeoJson, cornersLngLat, map]);
 
   return (
-    <>
-      <Link to="/">← Try another file</Link>
+    <div className="info-content-container">
+      <Link className="back-button" to="/">
+        <i className="button__icon-l fal fa-long-arrow-left fa-lg" aria-hidden="true"></i>
+        Try another file
+      </Link>
       <div className="info-content">
-        <div className="info-header">
-          <Link className="info-close" to="/">
-            ✖
+        <div className="info-content__header">
+          <Link className="info-content__close-button" title="Close" to="/">
+            <i
+              className="info-content__close-button-icon fal fa-times-circle fa-lg"
+              alt="Close"
+            ></i>
           </Link>
         </div>
-        {errorMessage && (
-          <div className="error info-header">{errorMessage}</div>
-        )}
-        <div className="info-pane">
-          <div className="pane-left">
+        {errorMessage && <div className="error info-header">{errorMessage}</div>}
+        <div className="info-content__pane-container">
+          <div className="info-content__pane--left">
             <div id="map-container" className="map" ref={mapContainer}></div>
           </div>
-          <div className="info-metadata pane-right">
+          <div className="info-metadata info-content__pane--right">
             {name && (
-              <p>
-                <span className="highlight">File name:</span> {name}
+              <p className="info-metadata__row">
+                <span className="info-metadata__key">File name:</span>
+                <span className="info-metadata__value">{name}</span>
               </p>
             )}
             {width && height && (
-              <p>
-                <span className="highlight">Size:</span> {width}, {height}
+              <p className="info-metadata__row">
+                <span className="info-metadata__key">Size:</span>
+                <span className="info-metadata__value">
+                  {width}, {height}
+                </span>
               </p>
             )}
             {bandCount && (
-              <p>
-                <span className="highlight">Band count:</span> {bandCount}
+              <p className="info-metadata__row">
+                <span className="info-metadata__key">Band count:</span>
+                <span className="info-metadata__value">{bandCount}</span>
               </p>
             )}
             {wkt && (
               <>
-                <div className="metadata-row">
-                  <div>
-                    <span className="highlight">Coordinate system:</span>
-                  </div>
-                  <div>
-                    {copiedWkt ? (
-                      <div className="export-button">
-                        <span>✔︎</span>
-                      </div>
-                    ) : (
-                      <button
-                        className="export-button"
-                        onClick={() => {
-                          navigator.clipboard
-                            .writeText(wkt)
-                            .then(() => setCopiedWkt(true));
-                          // Turn the button back on after 5 seconds so they can reuse it
-                          setTimeout(() => setCopiedWkt(false), 5000);
-                        }}
-                      >
-                        Copy
-                      </button>
-                    )}
+                <div className="info-metadata__row">
+                  <div className="info-metadata__row-header">
+                    <div className="info-metadata__key">Coordinate system:</div>
+                    <div>
+                      {copiedWkt ? (
+                        <div className="export-button">
+                          <span>✔︎</span>
+                        </div>
+                      ) : (
+                        <button
+                          className="export-button"
+                          onClick={() => {
+                            navigator.clipboard.writeText(wkt).then(() => setCopiedWkt(true));
+                            // Turn the button back on after 5 seconds so they can reuse it
+                            setTimeout(() => setCopiedWkt(false), 5000);
+                          }}
+                        >
+                          <i className="button__icon-l fas fa-copy" aria-hidden="true"></i>
+                          Copy
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="wkt">{wkt}</div>
@@ -159,17 +169,14 @@ function GeoTiffInfo({
             )}
           </div>
         </div>
-        <div className="info-pane">
+        <div className="info-content__pane-container">
           {cornersGeo && cornersLngLat && (
             <div className="corner-coordinates">
               <div className="coordinates-header">
                 <p>
-                  <span className="highlight">Corner coordinates</span>
+                  <span className="info-metadata__key">Corner coordinates</span>
                 </p>
-                <BoundsExport
-                  cornersGeo={cornersGeo}
-                  cornersLngLat={cornersLngLat}
-                />
+                <BoundsExport cornersGeo={cornersGeo} cornersLngLat={cornersLngLat} />
               </div>
               <table className="coordinates-table">
                 <thead>
@@ -226,7 +233,7 @@ function GeoTiffInfo({
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

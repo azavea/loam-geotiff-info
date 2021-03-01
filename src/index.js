@@ -10,7 +10,7 @@ Modal.setAppElement(appElement);
 // Some Mapbox elements were rendering on top of the overlay.
 Modal.defaultStyles.overlay.zIndex = "2";
 
-document.title = "GeoTIFF Info";
+document.title = "Azavea Loam: Run GDAL in the browser";
 
 ReactDOM.render(
   <React.StrictMode>
