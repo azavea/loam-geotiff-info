@@ -46,6 +46,8 @@ function GeoTiffInfo({
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/azavea/cklaf2vjy03tw17n3isbaehys",
+        center: [0, 0],
+        zoom: 2,
       });
       setMap(newMap);
       // Currently, the map isn't filling the full width of its container on initial render. It'd be
@@ -167,7 +169,7 @@ function GeoTiffInfo({
             )}
           </div>
         </div>
-        <div className="info-content__pane">
+        <div className="info-content__pane-container">
           {cornersGeo && cornersLngLat && (
             <div className="corner-coordinates">
               <div className="coordinates-header">
