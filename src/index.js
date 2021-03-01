@@ -1,22 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Modal from 'react-modal';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import Modal from "react-modal";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const appElement = document.getElementById('root');
+const appElement = document.getElementById("root");
 Modal.setAppElement(appElement);
 // Some Mapbox elements were rendering on top of the overlay.
-Modal.defaultStyles.overlay.zIndex = '2';
+Modal.defaultStyles.overlay.zIndex = "2";
 
-document.title = 'Azavea Loam: Run GDAL in the browser';
+document.title = "Azavea Loam: Run GDAL in the browser";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    appElement
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  appElement
 );
 
 // If you want to start measuring performance in your app, pass a function

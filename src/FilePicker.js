@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import Dropzone from 'react-dropzone';
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Dropzone from "react-dropzone";
 
 function FilePicker({ onFileSelect }) {
   const history = useHistory();
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleFileChange = files => {
+  const handleFileChange = (files) => {
     onFileSelect(files[0]);
-    history.push('/geotiff');
+    history.push("/geotiff");
   };
 
   return (
@@ -20,31 +20,25 @@ function FilePicker({ onFileSelect }) {
       onDragLeave={() => setIsDragging(false)}
     >
       {({ getRootProps, getInputProps }) => (
-        <div className='drag-container__focus' {...getRootProps()}>
+        <div className="drag-container__focus" {...getRootProps()}>
           <div
-            className={
-              isDragging
-                ? 'drag-container drag-container--dragging'
-                : 'drag-container'
-            }
+            className={isDragging ? "drag-container drag-container--dragging" : "drag-container"}
           >
-            <div className='drag-container__text-container'>
+            <div className="drag-container__text-container">
               {!isDragging ? (
                 <>
-                  <h2 className='drag-container__title'>
-                    geotiffinfo(filename)
-                  </h2>
+                  <h2 className="drag-container__title">geotiffinfo(filename)</h2>
                   <div>
                     <i
-                      className='drag-container__dragging-icon fas fa-sparkles fa-lg'
-                      aria-hidden='true'
+                      className="drag-container__dragging-icon fas fa-sparkles fa-lg"
+                      aria-hidden="true"
                     ></i>
                   </div>
-                  <p className='drag-container__desc'>
-                    Drag-and-drop or select a GeoTIFF from your file system.
-                    Information about the file will be displayed.
+                  <p className="drag-container__desc">
+                    Drag-and-drop or select a GeoTIFF from your file system. Information about the
+                    file will be displayed.
                   </p>
-                  <button className='button button--primary drag-container__button'>
+                  <button className="button button--primary drag-container__button">
                     Browse...
                   </button>
                 </>
@@ -52,11 +46,11 @@ function FilePicker({ onFileSelect }) {
                 <>
                   <div>
                     <i
-                      className='drag-container__dragging-icon fas fa-plus fa-lg'
-                      aria-hidden='true'
+                      className="drag-container__dragging-icon fas fa-plus fa-lg"
+                      aria-hidden="true"
                     ></i>
                   </div>
-                  <p className='drag-container__desc'>Drop your GeoTIFF here</p>
+                  <p className="drag-container__desc">Drop your GeoTIFF here</p>
                 </>
               )}
               <input {...getInputProps()} />
