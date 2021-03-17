@@ -312,6 +312,7 @@ main {
   flex-direction: column;
   width: 100%;
   align-items: center;
+  justify-content: center;
 }
 
 /* ****************** */
@@ -499,7 +500,6 @@ main {
   position: relative;
   border: 2px dashed #fff;
   background: #000;
-  width: 90%;
   margin: 0 auto;
   padding: 1rem;
   overflow: hidden;
@@ -511,7 +511,16 @@ main {
     background: transparent;
     border-radius: 100%;
     padding: 0;
-    margin-top: 25%;
+  }
+}
+
+.drag-container__focus {
+    overflow: hidden;
+}
+
+@media screen and (max-width: 46.8em) {
+  .drag-container__focus {
+    width: 90%;
   }
 }
 
